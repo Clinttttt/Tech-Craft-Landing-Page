@@ -1,6 +1,8 @@
 /* =========================================================
-   Clint Villanueva — Services page interactions
+   TechCraft Studio — Services page interactions
    Vanilla JS, progressive enhancement, accessible.
+   No network calls: the inquiry form submits natively into
+   a hidden iframe, so submissions go straight to email.
    ========================================================= */
 (function () {
   'use strict';
@@ -39,7 +41,7 @@
   if (prefersReduced || !('IntersectionObserver' in window)) {
     revealEls.forEach((el) => el.classList.add('is-visible'));
   } else {
-    document.querySelectorAll('.grid, .steps, .stack').forEach((group) => {
+    document.querySelectorAll('.grid, .steps, .skillmap').forEach((group) => {
       Array.from(group.children).forEach((child, i) => {
         if (child.classList.contains('reveal')) child.style.setProperty('--rd', `${(i % 6) * 70}ms`);
       });
@@ -61,32 +63,6 @@
       entries.forEach((entry) => { if (entry.isIntersecting) setCurrent(entry.target.id); });
     }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
     spyTargets.forEach((t) => spy.observe(t));
-  }
-
-  /* ---------- Count-up stats ---------- */
-  const counters = document.querySelectorAll('[data-count]');
-  if (counters.length) {
-    const animateCount = (el) => {
-      const target = parseInt(el.dataset.count, 10) || 0;
-      const suffix = el.dataset.suffix || '';
-      if (prefersReduced) { el.textContent = target + suffix; return; }
-      const dur = 1100; const start = performance.now();
-      const tick = (now) => {
-        const p = Math.min((now - start) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased) + suffix;
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    };
-    if ('IntersectionObserver' in window) {
-      const co = new IntersectionObserver((entries, obs) => {
-        entries.forEach((e) => { if (e.isIntersecting) { animateCount(e.target); obs.unobserve(e.target); } });
-      }, { threshold: 0.5 });
-      counters.forEach((c) => co.observe(c));
-    } else {
-      counters.forEach(animateCount);
-    }
   }
 
   /* ---------- Copy email ---------- */
@@ -124,11 +100,16 @@
   const openBtn = document.getElementById('openInquiry');
   const form = document.getElementById('inquiryForm');
   const formError = document.getElementById('formError');
+  const formSuccess = document.getElementById('formSuccess');
+  const frame = document.getElementById('inquiryFrame');
   let modalLastFocus = null;
 
   function openModal() {
     if (!modal) return;
     modalLastFocus = document.activeElement;
+    if (form) form.hidden = false;
+    if (formSuccess) formSuccess.hidden = true;
+    if (formError) formError.hidden = true;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     const first = modal.querySelector('#f-name');
@@ -143,10 +124,10 @@
   if (openBtn) openBtn.addEventListener('click', openModal);
   if (modal) {
     modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeModal));
-    // simple focus trap
     modal.addEventListener('keydown', (e) => {
       if (e.key !== 'Tab') return;
-      const focusable = modal.querySelectorAll('button, input, select, textarea, a[href]');
+      const focusable = Array.from(modal.querySelectorAll('button, input, select, textarea, a[href]'))
+        .filter((el) => !el.hidden && el.offsetParent !== null);
       if (!focusable.length) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
@@ -155,13 +136,16 @@
     });
   }
 
+  /* ---------- Form validation + native submit to hidden iframe ---------- */
   if (form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    let submitting = false;
+    let origText = submitBtn ? submitBtn.textContent : '';
+
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
       const name = form.elements['name'];
       const email = form.elements['email'];
       const service = form.elements['service'];
-      const budget = form.elements['budget'];
       const details = form.elements['details'];
       const required = [name, email, service, details];
       let valid = true;
@@ -171,34 +155,46 @@
         el.classList.toggle('is-invalid', !ok);
         if (!ok) valid = false;
       });
-      // basic email shape check
       if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
         email.classList.add('is-invalid');
         valid = false;
       }
+
       if (!valid) {
-        if (formError) formError.hidden = false;
+        e.preventDefault();
+        if (formError) { formError.textContent = 'Please complete the required fields.'; formError.hidden = false; }
         const firstInvalid = form.querySelector('.is-invalid');
         if (firstInvalid) firstInvalid.focus();
         return;
       }
-      if (formError) formError.hidden = true;
 
-      const subject = `Project inquiry — ${service.value} (${name.value})`;
-      const body =
-        `Name: ${name.value}\n` +
-        `Email: ${email.value}\n` +
-        `Service: ${service.value}\n` +
-        `Budget: ${budget.value || 'Not specified'}\n\n` +
-        `Project details:\n${details.value}`;
-      window.location.href =
-        `mailto:clintvillanueva82@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      closeModal();
+      // Valid: allow the native submit into the hidden iframe.
+      const keyField = form.elements['access_key'];
+      if (keyField && /REPLACE_WITH/.test(keyField.value)) {
+        e.preventDefault();
+        if (formError) { formError.textContent = 'Contact form is not connected yet — add your Web3Forms access key in index.html.'; formError.hidden = false; }
+        return;
+      }
+      if (formError) formError.hidden = true;
+      submitting = true;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
     });
-    // clear invalid state as the user types
+
     form.querySelectorAll('input, select, textarea').forEach((el) => {
       el.addEventListener('input', () => el.classList.remove('is-invalid'));
     });
+
+    // The hidden iframe finishes loading after a successful POST.
+    if (frame) {
+      frame.addEventListener('load', () => {
+        if (!submitting) return; // ignore the initial blank load
+        submitting = false;
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origText; }
+        form.reset();
+        form.hidden = true;
+        if (formSuccess) formSuccess.hidden = false;
+      });
+    }
   }
 
   /* ---------- Global Escape ---------- */
