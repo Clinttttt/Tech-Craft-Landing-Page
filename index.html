@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TechCraft Studio — Production-ready software for modern businesses. Clean architecture, maintainable code, and systems built for real-world use." />
+  <meta name="author" content="TechCraft Studio" />
+  <meta name="theme-color" content="#fbfbfa" />
+
+  <meta property="og:title" content="TechCraft Studio — Web, Desktop & Mobile App Development" />
+  <meta property="og:description" content="A custom software studio building production-ready web, desktop, and mobile applications." />
+  <meta property="og:type" content="website" />
+
+  <title>TechCraft Studio — Web, Desktop & Mobile App Development</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="#top" aria-label="TechCraft Studio — home">
+        <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="brand__name">TechCraft Studio</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#services" data-spy="services">Services</a>
+        <a href="#stack" data-spy="stack">Tech</a>
+        <a href="#process" data-spy="process">Process</a>
+        <a href="#engagement" data-spy="engagement">Engagement</a>
+        <a href="#contact" data-spy="contact">Contact</a>
+      </nav>
+
+      <div class="nav__right">
+        <span class="status" title="Open to projects">
+          <span class="status__dot" aria-hidden="true"></span> Available
+        </span>
+        <a class="btn btn--primary btn--sm" href="#contact">Start a project</a>
+        <button class="nav__toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobileMenu" hidden>
+      <a href="#services">Services</a>
+      <a href="#stack">Tech</a>
+      <a href="#process">Process</a>
+      <a href="#engagement">Engagement</a>
+      <a href="#contact">Contact</a>
+      <div class="nav__mobile-cta">
+        <a class="btn btn--primary" href="#contact">Start a project</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__copy reveal">
+          <p class="pill-tag"><span class="pill-tag__dot" aria-hidden="true"></span> Custom software studio · Available for projects</p>
+          <h1 id="hero-title">Production ready software for modern businesses.</h1>
+          <p class="hero__lead">We help businesses turn ideas into reliable digital solutions &mdash; from web platforms and desktop tools to cross-platform mobile applications. Our focus is clean architecture, maintainable code, and systems built for real-world use.</p>
+
+          <div class="hero__cta">
+            <a class="btn btn--primary btn--lg" href="#contact">Start a project</a>
+            <a class="btn btn--ghost btn--lg" href="#services">Explore services</a>
+          </div>
+
+          <p class="hero__note">Web · Desktop · Mobile &middot; Open to freelance, contract &amp; collaboration</p>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="hero-card">
+            <div class="hero-card__head">
+              <span class="hero-card__title">What I build</span>
+            </div>
+            <ul class="hero-card__list">
+              <li><span class="hc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span><strong>Web applications</strong><em>ASP.NET Core · Blazor · React/Angular</em></span></li>
+              <li><span class="hc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M2 20h20"/></svg></span><span><strong>Desktop applications</strong><em>.NET · MAUI Hybrid · WPF</em></span></li>
+              <li><span class="hc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><span><strong>Mobile applications</strong><em>.NET MAUI · React Native (Expo)</em></span></li>
+            </ul>
+            <div class="hero-card__foot">
+              <span class="health"><span class="health__dot" aria-hidden="true"></span> Clean architecture</span>
+              <span class="health"><span class="health__dot" aria-hidden="true"></span> Production-ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CREDIBILITY STRIP ===================== -->
+    <section class="trust" aria-label="Why clients trust my work">
+      <div class="container">
+        <ul class="trust__stats reveal">
+          <li><strong>Full-stack</strong><span>Frontend · Backend · Data</span></li>
+          <li><strong>3 platforms</strong><span>Web · Desktop · Mobile</span></li>
+          <li><strong>C# / .NET</strong><span>Modern core stack</span></li>
+          <li><strong>End-to-end</strong><span>Idea to launch</span></li>
+        </ul>
+        <ul class="trust__list reveal">
+          <li>Clean architecture</li>
+          <li>Production-ready code</li>
+          <li>Clear communication</li>
+          <li>Maintainable &amp; documented</li>
+          <li>On-time delivery</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title">What I can build for you</h2>
+          <p class="section__sub">One developer, three platforms, the same .NET foundation &mdash; so your product stays consistent and maintainable as it grows.</p>
+        </header>
+
+        <div class="grid grid--services">
+          <article class="card service reveal">
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M2 8h20"/></svg>
+            </span>
+            <h3>Web Applications</h3>
+            <p>Full-stack web apps and REST APIs &mdash; from dashboards and portals to internal tools, built to handle real users.</p>
+            <ul class="service__list">
+              <li>ASP.NET Core, Blazor &amp; React</li>
+              <li>REST APIs with JWT / RBAC auth</li>
+              <li>SQL Server / PostgreSQL data layers</li>
+              <li>Clean Architecture &amp; CQRS where it fits</li>
+            </ul>
+          </article>
+
+          <article class="card service reveal">
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M2 20h20M9 17l-1 3M15 17l1 3"/></svg>
+            </span>
+            <h3>Desktop Applications</h3>
+            <p>Reliable desktop software for Windows &mdash; business tools, utilities, and admin apps with clean, usable interfaces.</p>
+            <ul class="service__list">
+              <li>.NET, WPF &amp; MAUI Hybrid</li>
+              <li>Local &amp; cloud data integration</li>
+              <li>Offline-capable workflows</li>
+              <li>Installable, maintainable builds</li>
+            </ul>
+          </article>
+
+          <article class="card service reveal">
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+            </span>
+            <h3>Mobile Applications</h3>
+            <p>Cross-platform mobile apps for Android and iOS &mdash; built with .NET MAUI or React Native (Expo), sharing your existing backend.</p>
+            <ul class="service__list">
+              <li>.NET MAUI &amp; React Native (Expo)</li>
+              <li>Shared APIs with your web app</li>
+              <li>Auth, notifications &amp; storage</li>
+              <li>Consistent UI across devices</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TECH STACK ===================== -->
+    <section class="section section--alt" id="stack" aria-labelledby="stack-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Tech stack</p>
+          <h2 id="stack-title">The tools behind the work</h2>
+          <p class="section__sub">A focused, modern .NET stack &mdash; chosen for reliability, not novelty.</p>
+        </header>
+
+        <div class="skillmap reveal">
+          <div class="lane">
+            <div class="lane__head"><span class="lane__dot" aria-hidden="true"></span><h3>Backend</h3></div>
+            <ul class="pills"><li>C#</li><li>ASP.NET Core</li><li>Web API</li><li>REST</li><li>SignalR</li><li>Redis</li></ul>
+          </div>
+          <div class="lane">
+            <div class="lane__head"><span class="lane__dot" aria-hidden="true"></span><h3>Architecture</h3></div>
+            <ul class="pills"><li>Clean Architecture</li><li>CQRS</li><li>MediatR</li><li>Vertical Slice</li><li>DDD</li><li>SOLID / OOP</li></ul>
+          </div>
+          <div class="lane">
+            <div class="lane__head"><span class="lane__dot" aria-hidden="true"></span><h3>Frontend &amp; apps</h3></div>
+            <ul class="pills"><li>Blazor</li><li>React</li><li>React Native</li><li>Expo</li><li>MAUI Hybrid</li><li>.NET MAUI</li><li>WPF</li><li>Tailwind CSS</li></ul>
+          </div>
+          <div class="lane">
+            <div class="lane__head"><span class="lane__dot" aria-hidden="true"></span><h3>Data</h3></div>
+            <ul class="pills"><li>SQL Server</li><li>PostgreSQL</li><li>EF Core</li><li>Migrations</li></ul>
+          </div>
+          <div class="lane">
+            <div class="lane__head"><span class="lane__dot" aria-hidden="true"></span><h3>Auth &amp; security</h3></div>
+            <ul class="pills"><li>JWT</li><li>RBAC</li><li>Validation</li><li>Swagger / OpenAPI</li></ul>
+          </div>
+          <div class="lane">
+            <div class="lane__head"><span class="lane__dot" aria-hidden="true"></span><h3>AI, automation &amp; tooling</h3></div>
+            <ul class="pills"><li>ML.NET</li><li>Ollama</li><li>n8n</li><li>Git</li><li>GitHub</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROCESS ===================== -->
+    <section class="section" id="process" aria-labelledby="process-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Process</p>
+          <h2 id="process-title">How we'll work together</h2>
+          <p class="section__sub">A simple, transparent process so you always know where your project stands.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3>Discuss</h3>
+            <p>We talk through your idea, goals, and scope. I ask the right questions and give you an honest take on what's realistic.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3>Plan &amp; architect</h3>
+            <p>I propose a clear plan, tech choices, and timeline &mdash; with an architecture designed to scale and stay maintainable.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3>Build</h3>
+            <p>I develop in clear milestones with regular updates and working demos, so you see progress, not just promises.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">04</span>
+            <h3>Deliver &amp; support</h3>
+            <p>You get clean, documented code and a working product &mdash; plus support to deploy, hand off, or keep improving it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== WHY ME ===================== -->
+    <section class="section section--alt" id="why" aria-labelledby="why-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Why work with me</p>
+          <h2 id="why-title">Built to be trusted</h2>
+        </header>
+
+        <div class="grid grid--why">
+          <article class="card why reveal">
+            <h3>Production-ready, not just a demo</h3>
+            <p>I build software meant to run in the real world &mdash; with proper structure, auth, and error handling, not throwaway prototypes.</p>
+          </article>
+          <article class="card why reveal">
+            <h3>Clean, maintainable code</h3>
+            <p>Clear architecture and documented code mean your project stays easy to extend &mdash; by me or any developer after me.</p>
+          </article>
+          <article class="card why reveal">
+            <h3>Clear communication</h3>
+            <p>Regular updates, honest timelines, and plain-language explanations. You're never left guessing about progress.</p>
+          </article>
+          <article class="card why reveal">
+            <h3>Verified credentials</h3>
+            <p>Industry certifications in C#, REST APIs, and software engineering back the work &mdash; proven fundamentals, not just claims.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ENGAGEMENT ===================== -->
+    <section class="section" id="engagement" aria-labelledby="engagement-title">
+      <div class="container">
+        <header class="section__head section__head--center reveal">
+          <p class="eyebrow">Engagement</p>
+          <h2 id="engagement-title">Ways we can work</h2>
+          <p class="section__sub">Flexible options depending on your project. Pricing is scoped per project after we talk &mdash; no surprises.</p>
+        </header>
+
+        <div class="grid grid--engagement">
+          <article class="card engage reveal">
+            <h3>Fixed project</h3>
+            <p class="engage__for">Best for defined scopes</p>
+            <p>A clear deliverable, timeline, and price agreed upfront. Ideal for an MVP, a specific app, or a well-defined feature set.</p>
+            <a class="btn btn--ghost btn--block" href="#contact">Discuss a project</a>
+          </article>
+
+          <article class="card engage engage--featured reveal">
+            <span class="engage__badge">Most flexible</span>
+            <h3>Hourly / part-time</h3>
+            <p class="engage__for">Best for evolving work</p>
+            <p>Ongoing development billed by time. Great when scope is still shaping up or you need a developer who adapts as you go.</p>
+            <a class="btn btn--primary btn--block" href="#contact">Start a conversation</a>
+          </article>
+
+          <article class="card engage reveal">
+            <h3>Collaboration</h3>
+            <p class="engage__for">Best for teams &amp; founders</p>
+            <p>Join your team or co-build a product. Architecture, backend, or full-stack support alongside your existing developers.</p>
+            <a class="btn btn--ghost btn--block" href="#contact">Let's talk</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT / FINAL CTA ===================== -->
+    <section class="cta" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="cta__panel reveal">
+          <h2 id="contact-title">Have a project in mind?</h2>
+          <p>Tell me what you want to build &mdash; web, desktop, or mobile. I'll reply with honest advice and a clear way forward.</p>
+
+          <div class="cta__email">
+            <button class="btn btn--primary btn--lg" id="openInquiry" type="button">Tell us about your project</button>
+            <button class="btn btn--ghost btn--lg" id="copyEmail" data-email="clintvillanueva82@gmail.com" aria-label="Copy email address">
+              <span id="copyEmailText">Copy email</span>
+            </button>
+          </div>
+
+          <ul class="cta__links">
+            <li><a href="https://github.com/Clinttttt" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/clint-villanueva-851880352/" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+          <p class="cta__note">Usually replies within a day &middot; Open to freelance, contract &amp; collaboration</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a class="brand" href="#top" aria-label="TechCraft Studio — home">
+          <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+          <span class="brand__name">TechCraft Studio</span>
+        </a>
+        <p class="footer__tagline">Freelance .NET developer building web, desktop &amp; mobile applications.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#services">Services</a>
+        <a href="#stack">Tech</a>
+        <a href="#process">Process</a>
+        <a href="#engagement">Engagement</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="container footer__base">
+      <p>&copy; 2026 TechCraft Studio</p>
+      <a href="#top" class="footer__top" id="backTop">Back to top &uarr;</a>
+    </div>
+  </footer>
+
+  <!-- ===================== INQUIRY MODAL ===================== -->
+  <div class="modal" id="inquiryModal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="inquiryTitle">
+      <button class="modal__close" type="button" data-close aria-label="Close dialog">&times;</button>
+      <h2 id="inquiryTitle">Tell us about your project</h2>
+      <p class="modal__sub">Share a few details and we'll get back to you with honest advice and clear next steps.</p>
+
+      <form class="form" id="inquiryForm" novalidate>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Your name" />
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label for="f-service">Service</label>
+            <select id="f-service" name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Web Application</option>
+              <option>Desktop Application</option>
+              <option>Mobile Application</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-budget">Budget <span class="field__opt">(optional)</span></label>
+            <select id="f-budget" name="budget">
+              <option value="" selected>Prefer not to say</option>
+              <option>Under $500</option>
+              <option>$500 – $2,000</option>
+              <option>$2,000 – $5,000</option>
+              <option>$5,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-details">Project details</label>
+          <textarea id="f-details" name="details" rows="4" required placeholder="What are you building, and what problem should it solve?"></textarea>
+        </div>
+
+        <p class="form__error" id="formError" role="alert" hidden>Please complete the required fields.</p>
+
+        <div class="form__actions">
+          <button class="btn btn--primary btn--lg btn--block" type="submit">Send inquiry</button>
+        </div>
+        <p class="form__note">This opens your email app with the details ready to send.</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
