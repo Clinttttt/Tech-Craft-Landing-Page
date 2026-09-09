@@ -230,6 +230,7 @@ section[id], header[id] { scroll-margin-top:calc(var(--navh) + 14px); }
 .form { display:grid; gap:16px; }
 .form__row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .field { display:flex; flex-direction:column; gap:7px; }
+.field--nested { gap:6px; }
 .field label { font-size:.86rem; font-weight:600; color:var(--ink); }
 .field__opt { font-weight:400; color:var(--faint); font-family:var(--mono); font-size:.72rem; }
 .field input, .field select, .field textarea { font-family:var(--sans); font-size:.94rem; color:var(--ink); background:var(--surface); border:1px solid var(--border-2); border-radius:var(--radius-sm); padding:11px 13px; width:100%; transition:border-color .18s ease, box-shadow .18s ease; }
@@ -257,6 +258,10 @@ section[id], header[id] { scroll-margin-top:calc(var(--navh) + 14px); }
 .select-field__option:disabled { color:var(--faint); cursor:not-allowed; background:transparent; }
 .select-field__option:disabled::after { display:none; }
 .field select.select-native.is-invalid + .select-field .select-field__button { border-color:#dc2626; box-shadow:0 0 0 3px #fee2e2; }
+.budget-custom { overflow:hidden; max-height:0; opacity:0; transform:translateY(-5px); pointer-events:none; transition:max-height .28s cubic-bezier(.22,1,.36,1), opacity .2s ease, transform .24s ease, margin-top .24s ease; }
+.budget-custom.is-visible { max-height:92px; opacity:1; transform:translateY(0); margin-top:4px; pointer-events:auto; }
+.budget-custom label { color:var(--slate); font-size:.78rem; }
+.budget-custom input { background:#fbfbfa; }
 .form__error { margin:0; font-size:.86rem; color:#dc2626; font-weight:500; }
 .form__actions { margin-top:4px; }
 .form__note { margin:0; font-family:var(--mono); font-size:.74rem; color:var(--muted); text-align:center; }

@@ -1,5 +1,5 @@
 /* =========================================================
-   TechCraft Studio — Services page interactions
+   Craft Tech — Services page interactions
    Vanilla JS, progressive enhancement, accessible.
    No network calls: the inquiry form submits natively into
    a hidden iframe, so submissions go straight to email.
@@ -272,7 +272,26 @@
   const formError = document.getElementById('formError');
   const formSuccess = document.getElementById('formSuccess');
   const frame = document.getElementById('inquiryFrame');
+  const budgetSelect = document.getElementById('f-budget');
+  const budgetCustomField = document.getElementById('budgetCustomField');
+  const budgetCustomInput = document.getElementById('f-budget-amount');
   let modalLastFocus = null;
+
+  function syncBudgetCustomField(options = {}) {
+    if (!budgetSelect || !budgetCustomField || !budgetCustomInput) return;
+
+    const isCustom = budgetSelect.value === 'Custom amount';
+    budgetCustomField.classList.toggle('is-visible', isCustom);
+    budgetCustomField.setAttribute('aria-hidden', String(!isCustom));
+    budgetCustomInput.disabled = !isCustom;
+
+    if (!isCustom) {
+      budgetCustomInput.value = '';
+      budgetCustomInput.classList.remove('is-invalid');
+    } else if (options.focus) {
+      window.setTimeout(() => budgetCustomInput.focus(), 0);
+    }
+  }
 
   function openModal() {
     if (!modal) return;
@@ -297,7 +316,7 @@
     modal.addEventListener('keydown', (e) => {
       if (e.key !== 'Tab') return;
       const focusable = Array.from(modal.querySelectorAll('button, input, select, textarea, a[href]'))
-        .filter((el) => !el.hidden && el.offsetParent !== null && el.tabIndex >= 0 && window.getComputedStyle(el).visibility !== 'hidden');
+        .filter((el) => !el.hidden && !el.disabled && el.offsetParent !== null && el.tabIndex >= 0 && window.getComputedStyle(el).visibility !== 'hidden');
       if (!focusable.length) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
@@ -316,6 +335,8 @@
       const name = form.elements['name'];
       const email = form.elements['email'];
       const service = form.elements['service'];
+      const budget = form.elements['budget'];
+      const budgetAmount = form.elements['budget_amount'];
       const details = form.elements['details'];
       const required = [name, email, service, details];
       let valid = true;
@@ -327,6 +348,10 @@
       });
       if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
         email.classList.add('is-invalid');
+        valid = false;
+      }
+      if (budget && budget.value === 'Custom amount' && budgetAmount && budgetAmount.value.trim() === '') {
+        budgetAmount.classList.add('is-invalid');
         valid = false;
       }
 
@@ -359,6 +384,16 @@
       el.addEventListener('input', () => el.classList.remove('is-invalid'));
     });
 
+    if (budgetSelect) {
+      budgetSelect.addEventListener('change', () => {
+        syncBudgetCustomField({ focus: budgetSelect.value === 'Custom amount' });
+      });
+      form.addEventListener('reset', () => {
+        window.setTimeout(syncBudgetCustomField, 0);
+      });
+      syncBudgetCustomField();
+    }
+
     // The hidden iframe finishes loading after a successful POST.
     if (frame) {
       frame.addEventListener('load', () => {
@@ -366,6 +401,7 @@
         submitting = false;
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origText; }
         form.reset();
+        syncBudgetCustomField();
         form.hidden = true;
         if (formSuccess) formSuccess.hidden = false;
       });
