@@ -10,7 +10,7 @@
   --ink:#14171c; --slate:#3c434d; --muted:#6b7280; --faint:#9aa1ab;
   --accent:#1f5fff; --accent-ink:#1747c4; --accent-bg:#eef3ff; --signal:#16a34a;
   --radius:10px; --radius-sm:6px; --radius-lg:16px;
-  --maxw:1140px; --gut:clamp(16px,4vw,28px); --navh:64px;
+  --maxw:1140px; --gut:clamp(16px,4vw,28px); --navh:64px; --visual-vh:100vh;
   --shadow-sm:0 1px 2px rgba(20,23,28,.04),0 1px 3px rgba(20,23,28,.06);
   --shadow-md:0 6px 20px rgba(20,23,28,.07),0 2px 6px rgba(20,23,28,.05);
   --shadow-lg:0 24px 60px rgba(20,23,28,.12),0 8px 24px rgba(20,23,28,.08);
@@ -219,7 +219,7 @@ section[id], header[id] { scroll-margin-top:calc(var(--navh) + 14px); }
 .modal { position:fixed; inset:0; z-index:300; display:grid; place-items:center; padding:clamp(14px,4vw,28px); }
 .modal[hidden] { display:none; }
 .modal__backdrop { position:absolute; inset:0; background:rgba(8,10,14,.55); backdrop-filter:blur(3px); }
-.modal__dialog { position:relative; width:100%; max-width:560px; max-height:90vh; overflow-y:auto; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); padding:clamp(24px,4vw,36px); animation:modal-in .22s ease; }
+.modal__dialog { position:relative; width:100%; max-width:560px; max-height:min(90vh, calc(var(--visual-vh) - clamp(28px,8vw,56px))); overflow-y:auto; overscroll-behavior:contain; scroll-padding-block:24px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); padding:clamp(24px,4vw,36px); animation:modal-in .22s ease; }
 @keyframes modal-in { from{opacity:0; transform:translateY(10px) scale(.98);} to{opacity:1; transform:none;} }
 .modal__close { position:absolute; top:14px; right:14px; width:38px; height:38px; border-radius:50%; background:var(--surface-2); border:1px solid var(--border); color:var(--slate); font-size:1.5rem; line-height:1; cursor:pointer; transition:background .18s ease, color .18s ease; }
 .modal__close:hover { background:var(--border); color:var(--ink); }

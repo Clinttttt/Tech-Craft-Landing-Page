@@ -277,6 +277,46 @@
   const budgetCustomInput = document.getElementById('f-budget-amount');
   let modalLastFocus = null;
 
+  function syncVisualViewportHeight() {
+    const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    document.documentElement.style.setProperty('--visual-vh', `${Math.round(height)}px`);
+  }
+
+  function keepModalFieldVisible(target, options = {}) {
+    if (!modal || modal.hidden || !target) return;
+
+    const dialog = modal.querySelector('.modal__dialog');
+    if (!dialog) return;
+
+    const adjust = () => {
+      const field = target.closest('.field') || target;
+      const fieldRect = field.getBoundingClientRect();
+      const dialogRect = dialog.getBoundingClientRect();
+      const viewport = window.visualViewport;
+      const viewportTop = viewport ? viewport.offsetTop : 0;
+      const viewportBottom = viewportTop + (viewport ? viewport.height : window.innerHeight);
+      const visibleTop = Math.max(dialogRect.top, viewportTop) + 18;
+      const visibleBottom = Math.min(dialogRect.bottom, viewportBottom) - 24;
+      const fieldTop = fieldRect.top - 12;
+      const fieldBottom = fieldRect.bottom + 18;
+      let scrollDelta = 0;
+
+      if (fieldBottom > visibleBottom) scrollDelta = fieldBottom - visibleBottom;
+      else if (fieldTop < visibleTop) scrollDelta = fieldTop - visibleTop;
+
+      if (scrollDelta !== 0) {
+        dialog.scrollTo({
+          top: dialog.scrollTop + scrollDelta,
+          behavior: prefersReduced || options.instant ? 'auto' : 'smooth'
+        });
+      }
+    };
+
+    window.requestAnimationFrame(adjust);
+    window.setTimeout(adjust, 260);
+    window.setTimeout(adjust, 620);
+  }
+
   function syncBudgetCustomField(options = {}) {
     if (!budgetSelect || !budgetCustomField || !budgetCustomInput) return;
 
@@ -289,7 +329,12 @@
       budgetCustomInput.value = '';
       budgetCustomInput.classList.remove('is-invalid');
     } else if (options.focus) {
-      window.setTimeout(() => budgetCustomInput.focus(), 0);
+      window.setTimeout(() => {
+        budgetCustomInput.focus({ preventScroll: true });
+        keepModalFieldVisible(budgetCustomInput);
+      }, 80);
+    } else if (isCustom) {
+      keepModalFieldVisible(budgetCustomInput);
     }
   }
 
@@ -301,6 +346,7 @@
     if (formError) formError.hidden = true;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
+    syncVisualViewportHeight();
     const first = modal.querySelector('#f-name');
     if (first) first.focus();
   }
@@ -313,6 +359,9 @@
   if (openBtn) openBtn.addEventListener('click', openModal);
   if (modal) {
     modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeModal));
+    modal.querySelectorAll('input, textarea, .select-field__button').forEach((el) => {
+      el.addEventListener('focus', () => keepModalFieldVisible(el));
+    });
     modal.addEventListener('keydown', (e) => {
       if (e.key !== 'Tab') return;
       const focusable = Array.from(modal.querySelectorAll('button, input, select, textarea, a[href]'))
@@ -406,6 +455,17 @@
         if (formSuccess) formSuccess.hidden = false;
       });
     }
+  }
+
+  syncVisualViewportHeight();
+  window.addEventListener('resize', syncVisualViewportHeight, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      syncVisualViewportHeight();
+      if (modal && !modal.hidden && modal.contains(document.activeElement)) {
+        keepModalFieldVisible(document.activeElement, { instant: true });
+      }
+    }, { passive: true });
   }
 
   /* ---------- Global Escape ---------- */
