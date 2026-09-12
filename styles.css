@@ -95,10 +95,6 @@ section[id], header[id] { scroll-margin-top:calc(var(--navh) + 14px); }
 .link-arrow { font-weight:600; font-size:.9rem; color:var(--accent-ink); transition:color .2s ease; }
 .link-arrow:hover { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 
-/* ===================== PILL TAG ===================== */
-.pill-tag { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:.75rem; font-weight:500; color:var(--accent-ink); background:var(--accent-bg); border:1px solid #d8e2ff; padding:6px 13px; border-radius:999px; margin:0 0 20px; }
-.pill-tag__dot { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 3px rgba(31,95,255,.15); }
-
 /* ===================== HERO ===================== */
 .hero { position:relative; overflow:hidden; padding:clamp(28px,4vw,52px) 0; }
 .hero::before { content:""; position:absolute; inset:0; z-index:0; background-image:radial-gradient(circle at 1px 1px, rgba(20,23,28,.10) 1px, transparent 0); background-size:24px 24px; -webkit-mask-image:radial-gradient(ellipse 95% 80% at 50% 4%, #000 48%, transparent 88%); mask-image:radial-gradient(ellipse 95% 80% at 50% 4%, #000 48%, transparent 88%); pointer-events:none; }
